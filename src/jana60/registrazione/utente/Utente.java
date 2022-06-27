@@ -17,24 +17,25 @@ Gestire tramite try e catch eventuali errori in fase di creazione in modo che il
 	private int eta;
 	
 	//COTRUTTORE
-	public Utente(String nome, String cognome, int eta , String email, String password) throws Exception {
+	public Utente(String nome, String cognome, int eta , String email, String password) throws IllegalArgumentException {
 		super();
 		 this.nome = nome;
 			this.cognome = cognome;
 			this.email = email;
 			this.password = password;
-			this.eta = eta;
-		
-	    if(!(email.contains("@")))
-		    throw new Exception("L'indirizzo deve contenere il carattere @");
+			this.eta = eta;  
+			
+		 validaEmail(email);
+		 
 	    if(password.length() < 8)
 		    throw new Exception("La password deve contenere un minimo di 8 caratteri!");
 			 if (password.length() > 12)
-		    throw new Exception("La password deve contenere un massimo di 12 caratteri!");		
+		    throw new Exception("La password deve contenere un massimo di 12 caratteri!");	
+			 
 			 if(eta <18)
-					throw new Exception("Maggiore età richiesta!");
-           
-	}		
+					throw new Exception("Maggiore età richiesta!");   
+	}
+	
 		
 	//GETTER E SETTER
 	public String getNome() {
@@ -76,9 +77,19 @@ Gestire tramite try e catch eventuali errori in fase di creazione in modo che il
 	public void setEta(int eta) {
 		this.eta = eta;
 	}
-	  
-public String toString( ) {
-	return "Nome:" + nome + "\n" + "Cognome:" + cognome + "\n" + "Eta:" + eta + "\n" + "Email:" + email + "\n" + password;
+	
+    private void validaEmail (String emailInput)
+    throws IllegalArgumentException, NullPointerException {
+    if(!email.contains("@") || !email.contains(".")) {
+    	if (emailInput == null)
+    		throw new NullPointerException ("La password non può essere null!");
+    }
+    }
+	    throw new IllegalArgumentException("L'indirizzo deve contenere il carattere @");
+	    
+	    
+    public String toString( ) {
+	return "Nome:" + nome + "\n" + "Cognome:" + cognome + "\n" + "Eta:" + eta + "\n" + "Email:" + email;
 }
 }
 	
