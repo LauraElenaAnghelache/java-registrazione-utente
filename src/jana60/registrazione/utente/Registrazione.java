@@ -8,38 +8,39 @@ public class Registrazione {
 		Scanner scan = new Scanner(System.in);
 		
 		try {
-			System.out.println("inserire il nome: ");
-			String nome = scan.nextLine();
-			System.out.println("inserire il cognome: ");
-			String cognome = scan.nextLine();
-			
-			System.out.println("inserire l'età: ");
-			int eta = Integer.parseInt(scan.nextLine());
-			
-			System.out.println("Inserire la  password: ");
-			String password = scan.nextLine();
-			System.out.println("inserire email: ");
-			String email = scan.nextLine();
-			
-			Utente nuovoUtente = new Utente(nome, cognome, eta , email, password);
-			
-			System.out.println("Account creato con i dati: ");
-			System.out.println(nuovoUtente.toString());
-			
-		} catch(NumberFormatException nfe) {
-			System.out.println("l'input inserito non è un numero valido");
-			System.out.println(nfe.getMessage());
-		} catch(Exception e) {
-			System.out.println("impossibile creare l'account");
-			System.out.println(e.getMessage()); 
-		} finally {
-			System.out.println("Arrivederci!");
+		      // chiedo i dati all'utente
+		      System.out.print("Inserisci nome: ");
+		      String nomeUtente = scan.nextLine();
+
+		      System.out.print("Inserisci cognome: ");
+		      String cognomeUtente = scan.nextLine();
+
+		      System.out.print("Inserisci email: ");
+		      String emailUtente = scan.nextLine();
+
+		      System.out.print("Inserisci password: ");
+		      String passwordUtente = scan.nextLine();
+
+		      System.out.print("Inserisci età: ");
+		      int etaUtente = Integer.parseInt(scan.nextLine());
+
+		      // provo a costruire un oggetto Utente
+		      Utente nuovoUtente =
+		          new Utente(nomeUtente, cognomeUtente, emailUtente, passwordUtente, etaUtente);
+
+		      System.out.println("Grazie di esserti registrato " + nuovoUtente.getNome());
+
+		    } catch (NumberFormatException e) {
+		      System.out.println("Numero non valido");
+		    } catch (IllegalArgumentException e) {
+		      System.out.println("Parametro non valido: " + e.getMessage());
+		    } catch (NullPointerException e) {
+		      System.out.println("Parametro nullo: " + e.getMessage());
+		    } catch (Exception genericExc) {
+		      System.out.println("Errore imprevisto: " + genericExc.getMessage());
+		    }
+
+		    scan.close();
+		  }
+
 		}
-		
-		
-		scan.close();
-
-
-	}
-
-}
